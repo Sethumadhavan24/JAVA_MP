@@ -1,0 +1,124 @@
+/* TrainerDashboard.css */
+
+/* Dashboard Container */
+.dashboard-container {
+    padding: 30px;
+    width: 100%;
+}
+
+/* Status Badge */
+.dashboard-container .status-badge {
+    display: inline-block;
+    padding: 6px 12px;
+    background: rgba(0, 212, 255, 0.2);
+    border: 1px solid #00d4ff;
+    border-radius: 20px;
+    color: #00d4ff;
+    font-weight: bold;
+    margin-bottom: 20px;
+}
+
+/* Profile Section */
+.profile-section, .client-history-section {
+    margin-bottom: 30px;
+    padding: 20px;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 12px;
+    border: 1px solid #00d4ff;
+    box-shadow: 0 0 15px rgba(0, 212, 255, 0.2);
+    width: 100%;
+}
+
+/* Client Table */
+.client-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 15px;
+}
+
+.client-table th, .client-table td {
+    padding: 12px;
+    text-align: left;
+    border-bottom: 1px solid rgba(0, 212, 255, 0.3);
+}
+
+.client-table th {
+    background: rgba(0, 212, 255, 0.1);
+    color: #00d4ff;
+    font-weight: bold;
+}
+
+.client-table tr:hover {
+    background: rgba(255, 255, 255, 0.05);
+}
+
+/* Logout Button */
+.logout-button {
+    background: linear-gradient(45deg, #ff6b6b 0%, #9d4edd 100%);
+    color: #ffffff;
+    border: none;
+    padding: 12px 20px;
+    border-radius: 6px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 0 10px rgba(255, 107, 107, 0.3);
+}
+
+.logout-button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(255, 107, 107, 0.5);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .dashboard-container {
+        padding: 20px;
+    }
+
+    .profile-section, .client-history-section {
+        padding: 15px;
+        margin-bottom: 20px;
+    }
+
+    .client-table {
+        font-size: 14px;
+    }
+
+    .client-table th, .client-table td {
+        padding: 8px;
+    }
+
+    .logout-button {
+        width: 100%;
+        padding: 10px;
+    }
+
+    .dashboard-container .status-badge {
+        font-size: 14px;
+        padding: 4px 8px;
+    }
+}
+
+@media (max-width: 480px) {
+    .dashboard-container {
+        padding: 15px;
+    }
+
+    .profile-section, .client-history-section {
+        padding: 10px;
+    }
+
+    .client-table {
+        font-size: 12px;
+    }
+
+    .client-table th, .client-table td {
+        padding: 6px;
+    }
+
+    .logout-button {
+        padding: 8px;
+        font-size: 14px;
+    }
+}

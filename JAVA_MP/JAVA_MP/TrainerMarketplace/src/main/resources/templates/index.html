@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>SkillLink - Welcome</title>
+    <link rel="stylesheet" th:href="@{/css/global.css}">
+</head>
+<body>
+<div class="container">
+    <div class="header">
+        <h1 th:text="'Welcome to SkillLink'">Welcome to SkillLink</h1>
+        <p>The Trusted Marketplace for Freelance Training and Coaching (Phase 4 Demo)</p>
+    </div>
+
+    <h2>I am a...</h2>
+    <ul>
+        <li>
+            <a th:href="@{/search}">Trainee (Alex): Find a Trainer and Book a Session</a>
+        </li>
+        <li>
+            <a th:href="@{/trainer/dashboard}">Trainer (Maya): Access Dashboard / CRM</a>
+        </li>
+    </ul>
+
+    <hr>
+    <p>System Status: **Backend Core is Verified** (Running on port 8081)</p>
+</div>
+</body>
+</html>

@@ -1,0 +1,105 @@
+/* frontend/src/App.css */
+
+/* Futuristic Neon Theme Styles */
+
+/* Global Container */
+.container {
+    padding: 20px;
+    width: 100%;
+    margin: 0 auto;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 15px;
+    box-shadow: 0 0 20px rgba(0, 212, 255, 0.2);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(0, 212, 255, 0.3);
+    box-sizing: border-box;
+}
+
+/* App Header */
+.app-header {
+    background: linear-gradient(90deg, #9d4edd 0%, #00d4ff 100%);
+    padding: 15px 30px;
+    box-shadow: 0 0 15px rgba(157, 78, 221, 0.5);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.app-header nav {
+    display: flex;
+    align-items: center;
+    gap: 30px;
+    width: 100%;
+    margin: 0 auto;
+    max-width: none;
+    box-sizing: border-box;
+}
+
+.app-header a {
+    color: #ffffff;
+    text-decoration: none;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    padding: 8px 12px;
+    border-radius: 5px;
+}
+
+.app-header a:hover {
+    background: rgba(255, 255, 255, 0.1);
+    box-shadow: 0 0 10px rgba(0, 255, 136, 0.5);
+}
+
+.app-header h1 {
+    margin: 0;
+    font-size: 1.8rem;
+    text-shadow: 0 0 10px rgba(0, 212, 255, 0.5);
+}
+
+/* App Content */
+.app-content {
+    min-height: calc(100vh - 80px);
+    padding: 20px 0;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+/* Responsive Design for App */
+@media (max-width: 768px) {
+    .app-header nav {
+        flex-direction: column;
+        gap: 15px;
+    }
+
+    .container {
+        padding: 15px;
+    }
+
+    .app-header {
+        padding: 10px 15px;
+    }
+
+    .app-header h1 {
+        font-size: 1.5rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .app-header nav {
+        gap: 10px;
+    }
+
+    .app-header a {
+        padding: 6px 8px;
+        font-size: 14px;
+    }
+
+    .container {
+        padding: 10px;
+    }
+
+    .app-content {
+        padding: 10px 0;
+    }
+}

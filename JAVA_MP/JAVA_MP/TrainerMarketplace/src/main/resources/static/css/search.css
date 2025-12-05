@@ -1,0 +1,49 @@
+/* src/main/resources/static/css/search.css */
+
+.search-form {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 40px;
+    justify-content: center;
+}
+.search-form input,
+.search-form button {
+    padding: 10px;
+    border: 1px solid #ced4da;
+    border-radius: 4px;
+}
+.search-form button {
+    background-color: #28a745;
+    color: white;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+.search-form button:hover {
+    background-color: #218838;
+}
+.trainer-card {
+    border: 1px solid #007bff;
+    background-color: #e9f7ff;
+    padding: 20px;
+    margin-bottom: 15px;
+    border-radius: 6px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.trainer-info h3 {
+    margin-top: 0;
+    color: #343a40;
+}
+.book-button {
+    background-color: #ffc107;
+    color: #343a40;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+.book-button:hover {
+    background-color: #e0a800;
+}

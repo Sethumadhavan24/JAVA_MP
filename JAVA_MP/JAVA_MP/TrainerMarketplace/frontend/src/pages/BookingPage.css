@@ -1,0 +1,136 @@
+/* BookingPage.css */
+
+/* Booking Page */
+.booking-page {
+    padding: 30px;
+    width: 100%;
+}
+
+/* Header */
+.booking-page .header {
+    margin-bottom: 10px;
+}
+
+/* Status Badge */
+.booking-page .status-badge {
+    display: inline-block;
+    padding: 6px 12px;
+    background: rgba(0, 255, 136, 0.2);
+    border: 1px solid #00ff88;
+    border-radius: 20px;
+    color: #00ff88;
+    font-weight: bold;
+    margin-bottom: 15px;
+}
+
+/* Slot List */
+.slot-list {
+    display: grid;
+    gap: 15px;
+    margin-top: 20px;
+    width: 100%;
+}
+
+/* Slot Card */
+.slot-card {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid #00d4ff;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 212, 255, 0.2);
+    transition: all 0.3s ease;
+}
+
+.slot-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(0, 212, 255, 0.4);
+}
+
+/* Book Button */
+.book-button {
+    background: linear-gradient(45deg, #9d4edd 0%, #00ff88 100%);
+    color: #ffffff;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 6px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 0 10px rgba(157, 78, 221, 0.3);
+}
+
+.book-button:hover:not(:disabled) {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(157, 78, 221, 0.5);
+}
+
+.book-button:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+/* Back Link */
+.back-link {
+    display: inline-block;
+    margin-top: 20px;
+    color: #00ff88;
+    text-decoration: none;
+    font-weight: bold;
+    transition: color 0.3s ease;
+}
+
+.back-link:hover {
+    color: #9d4edd;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .booking-page {
+        padding: 20px;
+    }
+
+    .slot-card {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 10px;
+        padding: 12px;
+    }
+
+    .book-button {
+        width: 100%;
+        text-align: center;
+        padding: 8px 12px;
+    }
+
+    .booking-page .status-badge {
+        font-size: 14px;
+        padding: 4px 8px;
+    }
+}
+
+@media (max-width: 480px) {
+    .booking-page {
+        padding: 15px;
+    }
+
+    .slot-list {
+        gap: 10px;
+    }
+
+    .slot-card {
+        padding: 10px;
+        font-size: 14px;
+    }
+
+    .book-button {
+        padding: 8px 10px;
+        font-size: 14px;
+    }
+
+    .back-link {
+        font-size: 14px;
+    }
+}

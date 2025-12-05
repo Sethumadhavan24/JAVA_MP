@@ -1,0 +1,129 @@
+/* SearchPage.css */
+
+/* Search Form */
+.search-form {
+    display: flex;
+    gap: 15px;
+    margin-bottom: 30px;
+    flex-wrap: wrap;
+    align-items: center;
+    width: 100%;
+}
+
+.search-form input, .search-form button {
+    padding: 12px 15px;
+    border-radius: 8px;
+    border: 1px solid #00d4ff;
+    background: rgba(255, 255, 255, 0.1);
+    color: #000000;
+    font-size: 16px;
+    transition: all 0.3s ease;
+}
+
+.search-form input {
+    flex: 1;
+    min-width: 200px;
+}
+
+.search-form button {
+    background: linear-gradient(45deg, #00ff88 0%, #00d4ff 100%);
+    color: #0a0a0a;
+    font-weight: bold;
+    border: none;
+    cursor: pointer;
+    box-shadow: 0 0 10px rgba(0, 255, 136, 0.3);
+}
+
+.search-form button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(0, 255, 136, 0.5);
+}
+
+.search-form button:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+/* Suggestions List */
+.suggestions-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    position: absolute;
+    background: rgba(10, 10, 10, 0.95);
+    border: 1px solid #00d4ff;
+    width: 100%;
+    max-height: 200px;
+    overflow-y: auto;
+    z-index: 10;
+    box-shadow: 0 4px 20px rgba(0, 212, 255, 0.3);
+    border-radius: 8px;
+}
+
+.suggestions-list li {
+    padding: 12px 15px;
+    cursor: pointer;
+    transition: background 0.3s ease;
+    border-bottom: 1px solid rgba(0, 212, 255, 0.2);
+}
+
+.suggestions-list li:hover {
+    background: rgba(0, 212, 255, 0.1);
+    color: #00ff88;
+}
+
+/* Results List */
+.results-list {
+    margin-top: 20px;
+    width: 100%;
+}
+
+/* Error Message */
+.error-message {
+    color: #ff6b6b;
+    background: rgba(255, 107, 107, 0.1);
+    border: 1px solid #ff6b6b;
+    padding: 10px;
+    border-radius: 6px;
+    margin-bottom: 15px;
+    width: 100%;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .search-form {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 10px;
+    }
+
+    .search-form input {
+        min-width: auto;
+        width: 100%;
+    }
+
+    .search-form button {
+        width: 100%;
+    }
+
+    .suggestions-list {
+        max-height: 150px;
+    }
+}
+
+@media (max-width: 480px) {
+    .search-form input, .search-form button {
+        padding: 10px 12px;
+        font-size: 14px;
+    }
+
+    .suggestions-list li {
+        padding: 10px 12px;
+        font-size: 14px;
+    }
+
+    .error-message {
+        padding: 8px;
+        font-size: 14px;
+    }
+}

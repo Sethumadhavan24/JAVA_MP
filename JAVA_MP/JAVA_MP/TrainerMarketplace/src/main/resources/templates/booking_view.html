@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>SkillLink - Book Session</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <link rel="stylesheet" th:href="@{/css/global.css}">
+    <style>
+        .slot-list { margin-top: 20px; }
+        .slot-card { border: 1px solid #ced4da; padding: 10px; margin-bottom: 10px; border-radius: 4px; display: flex; justify-content: space-between; align-items: center; }
+        .slot-card button { background-color: #007bff; color: white; border: none; padding: 8px 12px; cursor: pointer; }
+        .slot-card button:hover { background-color: #0056b3; }
+        .alert-message { padding: 15px; border-radius: 4px; margin-bottom: 15px; }
+        .alert-success { background-color: #d4edda; color: #155724; border: 1px solid #c3e6cb; }
+        .alert-error { background-color: #f8d7da; color: #721c24; border: 1px solid #f5c6cb; }
+    </style>
+</head>
+<body>
+<div class="container">
+    <div class="header">
+        <h1 id="trainerName">Viewing Availability</h1>
+        <p><a th:href="@{/search}">← Back to Search Results</a></p>
+        <div id="statusMessage" class="alert-message" style="display: none;"></div>
+    </div>
+
+    <h2>Available Slots (Instant Booking)</h2>
+    <div id="slotList" class="slot-list">
+        <p>Loading slots...</p>
+    </div>
+</div>
+
+<script>
+    $(document).ready(function() {
+        // NOTE: In a real app, the Trainer ID would be read from a Thymeleaf Model
+        // or the URL path by JavaScript, but for testing, we extract it from the URL.
+        const pathSegments = window.location.pathname.split('/');
+        const trainerId = pathSegments[pathSegments.length - 1]; // Assumes ID is the last part of /booking/trainer/{id}
+
+        if (!trainerId || isNaN(trainerId)) {
+            $('#slotList').html('<p style="color: red;">Error: Invalid Trainer ID in URL.</p>');
+            return;
+        }
+
+        // For testing, hardcode Trainee User ID (Alex's ID from registration tests)
+        // You must verify Alex's user_id in your MySQL 'users' table (likely 2)
+        const traineeUserId = 2;
+
+        // 1. Fetch Trainer Details (Basic Mock)
+        $('#trainerName').text(`Viewing Availability for Trainer ID: ${trainerId}`);
+
+        // 2. Load Available Slots
+        loadAvailableSlots(trainerId);
+
+        function loadAvailableSlots(id) {
+            const apiUrl = `/api/booking/trainer/${id}/slots`;
+
+            $.ajax({
+                url: apiUrl,
+                method: 'GET',
+                success: function(slots) {
+                    renderSlots(slots);
+                },
+                error: function(jqXHR, textStatus, errorThrown) {
+                    $('#slotList').html('<p style="color: red;">Error loading availability. Trainer may not have set slots.</p>');
+                }
+            });
+        }
+
+        // 3. Render Slots and Attach Booking Handlers
+        function renderSlots(slots) {
+            const list = $('#slotList');
+            list.empty();
+
+            if (slots.length === 0) {
+                list.html('<p>This trainer currently has no available slots. Check back soon!</p>');
+                return;
+            }
+
+            slots.forEach(slot => {
+                const startTime = new Date(slot.startTime).toLocaleString('en-IN', { dateStyle: 'medium', timeStyle: 'short' });
+                const endTime = new Date(slot.endTime).toLocaleTimeString('en-IN', { timeStyle: 'short' });
+
+                const card = `
+                    <div class="slot-card" data-slot-id="${slot.id}">
+                        <span>${startTime} - ${endTime}</span>
+                        <button class="bookBtn" data-slot-id="${slot.id}">Book Now</button>
+                    </div>
+                `;
+                list.append(card);
+            });
+
+            // Attach click handler to all 'Book Now' buttons
+            $('.bookBtn').click(handleBookingSubmission);
+        }
+
+        // 4. Handle Booking Submission (POST Transaction)
+        function handleBookingSubmission() {
+            const slotId = $(this).data('slot-id');
+            const button = $(this);
+            button.prop('disabled', true).text('Processing...');
+
+            const submitUrl = `/api/booking/submit?traineeUserId=${traineeUserId}&slotId=${slotId}`;
+
+            $.ajax({
+                url: submitUrl,
+                method: 'POST',
+                success: function(booking) {
+                    displayMessage('alert-success', `Booking Confirmed! Total: ₹${booking.totalAmount.toFixed(2)}. Payout: ₹${booking.trainerPayout.toFixed(2)}. (Status: ${booking.status})`);
+                    // Visual update: remove the booked slot
+                    $(`.slot-card[data-slot-id=${slotId}]`).fadeOut();
+                    loadAvailableSlots(trainerId); // Reload the list to ensure lock status
+                },
+                error: function(jqXHR) {
+                    let errorMessage = 'Booking failed. Please try again.';
+                    if (jqXHR.status === 409) {
+                         errorMessage = 'Error: Slot was just booked by someone else. Please choose another time.'; // Concurrency Lock Check!
+                    } else if (jqXHR.responseJSON && jqXHR.responseJSON.message) {
+                        errorMessage = `Error: ${jqXHR.responseJSON.message}`;
+                    }
+                    displayMessage('alert-error', errorMessage);
+                    button.prop('disabled', false).text('Book Now');
+                }
+            });
+        }
+
+        function displayMessage(type, message) {
+            const msgBox = $('#statusMessage');
+            msgBox.removeClass('alert-success alert-error').addClass(type).html(`<strong>${message}</strong>`).fadeIn();
+            setTimeout(() => msgBox.fadeOut(), 8000);
+        }
+    });
+</script>
+</body>
+</html>
